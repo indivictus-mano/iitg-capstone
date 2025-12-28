@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero-section" id="hero">
+    <h1>Discover Content That Matches Your Vibe</h1>
+    <p>AI-powered recommendations for Movies, Music, and Blogs.</p>
+    <div class="chips">
+        <span class="chip" onclick="setInput('I feel happy and energetic')">Happy</span>
+        <span class="chip" onclick="setInput('I am stressed and need to relax')">Stressed</span>
+        <span class="chip" onclick="setInput('Values solitude and quiet')">Lonely</span>
+    </div>
+</div>
+
+<div id="results-section">
+    <!-- Initial Feed (Visible on Load) -->
+    {% if initial_feed %}
+    <div id="initial-feed">
+        <div class="results-header">
+            <h2 id="mood-title">Explore Blogs</h2>
+        </div>
+        <div class="grid-container">
+            {% for item in initial_feed %}
+            <div class="card">
+                <div class="thumbnail" onclick="window.location.href='/watch/{{ item.id }}'">
+                    <img src="{{ item.thumbnail }}" alt="{{ item.title }}">
+                    <div class="duration" onclick="filterByTopic('{{ item.genre }}')"
+                        style="cursor: pointer; z-index: 10;">{{ item.genre }}</div>
+                </div>
+                <div class="card-content">
+                    <div class="card-icon"><i class="fas fa-file-alt"></i></div>
+                    <div class="card-text">
+                        <div class="card-title" onclick="window.location.href='/watch/{{ item.id }}'">{{ item.title }}
+                        </div>
+                        <div class="card-meta">
+                            {{ item.type }} • {{ item.views }} views • {{ item.uploaded_time }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Dynamic Results (Injected by JS) -->
+    <div class="results-header hidden" id="dynamic-header">
+        <h2 id="dynamic-title">Recommended for you</h2>
+    </div>
+
+    <div class="grid-container" id="grid">
+        <!-- Cards injected by JS -->
+    </div>
+</div>
+
+<!-- Loading Spinner -->
+<div id="loader" class="loader hidden"></div>
+{% endblock %}

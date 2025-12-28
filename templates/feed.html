@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="feed-container">
+    <h1 style="margin-bottom: 20px; font-size: 1.5rem;">{{ title }}</h1>
+
+    {% if content|length == 0 %}
+    <div class="empty-state">
+        <p>No content found here yet. Go explore!</p>
+    </div>
+    {% else %}
+    <div class="grid-container">
+        {% for item in content %}
+        <div class="card">
+            <div class="thumbnail" onclick="window.location.href='/watch/{{ item.id }}'">
+                <img src="{{ item.thumbnail }}" alt="{{ item.title }}">
+                <div class="duration" onclick="filterByTopic('{{ item.genre }}')" style="cursor: pointer; z-index: 10;">
+                    {{ item.genre }}</div>
+            </div>
+            <div class="card-content">
+                <div class="card-icon"><i class="fas fa-file-alt"></i></div>
+                <div class="card-text">
+                    <div class="card-title" onclick="window.location.href='/watch/{{ item.id }}'">{{ item.title }}</div>
+                    <div class="card-meta">
+                        {{ item.type }} • {{ item.views }} views • {{ item.uploaded_time }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

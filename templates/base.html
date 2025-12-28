@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoodFlow | AI Content</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-brain"></i> <span>MoodFlow</span>
+            </div>
+            <nav>
+                <a href="{{ url_for('index') }}" class="{{ 'active' if request.path == '/' else '' }}"><i
+                        class="fas fa-home"></i> Home</a>
+                <a href="{{ url_for('trending') }}" class="{{ 'active' if request.path == '/trending' else '' }}"><i
+                        class="fas fa-fire"></i> Trending</a>
+                <a href="{{ url_for('history_page') }}" class="{{ 'active' if request.path == '/history' else '' }}"><i
+                        class="fas fa-history"></i> History</a>
+                <a href="{{ url_for('favorites') }}" class="{{ 'active' if request.path == '/favorites' else '' }}"><i
+                        class="fas fa-heart"></i> Favorites</a>
+                <div class="separator"></div>
+                <a href="{{ url_for('settings') }}" class="{{ 'active' if request.path == '/settings' else '' }}"><i
+                        class="fas fa-cog"></i> Settings</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-bar">
+                <div class="search-container">
+                    <input type="text" id="mood-input"
+                        placeholder="How are you feeling today? (e.g. 'Stressed out...')">
+                    <button id="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="user-profile">
+                    <!-- Added direct theme toggle here -->
+                    <div class="header-toggle" id="header-theme-toggle" style="cursor: pointer; font-size: 1.2rem;">
+                        <i class="fas fa-adjust"></i>
+                    </div>
+                    <div class="notification"><i class="fas fa-bell"></i></div>
+                    <div class="avatar">U</div>
+                </div>
+            </header>
+
+            <!-- Dynamic Content Area -->
+            <div id="content-area">
+                {% block content %}{% endblock %}
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="watch-container">
+    <!-- Left Column: Content -->
+    <div class="primary-col">
+        <div class="video-player-mock">
+            <!-- In a real youtube clone, this is a video. Here it is a blog cover image -->
+            <img src="{{ item.thumbnail }}" alt="Cover" class="large-cover">
+            <div class="play-overlay"><i class="fas fa-book-open"></i> Read Mode</div>
+        </div>
+
+        <h1 class="video-title">{{ item.title }}</h1>
+
+        <div class="video-meta-row">
+            <div class="author-info">
+                <img src="{{ item.author_img }}" alt="Author" class="author-avatar">
+                <div class="author-text">
+                    <div class="author-name">{{ item.author }}</div>
+                    <div class="sub-count">1.2M subscribers</div>
+                </div>
+                <button class="subscribe-btn">Subscribe</button>
+            </div>
+
+            <div class="actions">
+                <button class="pill-btn"><i class="far fa-thumbs-up"></i> {{ item.likes }}</button>
+                <button class="pill-btn"><i class="far fa-thumbs-down"></i></button>
+                <button class="pill-btn"><i class="fas fa-share"></i> Share</button>
+                <button class="pill-btn"><i class="fas fa-ellipsis-h"></i></button>
+            </div>
+        </div>
+
+        <div class="description-box">
+            <div class="meta-stats">{{ item.views }} views • {{ item.uploaded_time }}</div>
+            <div class="content-body">
+                {{ item.body | safe }}
+            </div>
+        </div>
+
+        <!-- Comments Mock -->
+        <div class="comments-section">
+            <h3>2,408 Comments</h3>
+            <div class="comment-input-row">
+                <div class="avatar">U</div>
+                <input type="text" placeholder="Add a comment...">
+            </div>
+            <!-- Mock Comment -->
+            <div class="comment">
+                <div class="avatar" style="background:green">A</div>
+                <div class="comment-text">
+                    <div class="comment-header">Alex <span class="time">2 hours ago</span></div>
+                    <div class="comment-body">This AI generated blog is actually surprisingly accurate!</div>
+                    <div class="comment-actions"><i class="far fa-thumbs-up"></i> 12</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column: Up Next -->
+    <div class="secondary-col">
+        <h3>Up Next</h3>
+        {% for related in related_items %}
+        <div class="video-row" onclick="window.location.href='/watch/{{ related.id }}'">
+            <div class="row-thumb">
+                <img src="{{ related.thumbnail }}" alt="Thumb">
+                <div class="duration-sm">{{ related.genre }}</div>
+            </div>
+            <div class="row-info">
+                <div class="row-title">{{ related.title }}</div>
+                <div class="row-meta">{{ related.author }}</div>
+                <div class="row-meta">{{ related.views }} views</div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

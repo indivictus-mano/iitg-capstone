@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="settings-container">
+    <h1>Settings</h1>
+
+    <div class="setting-item">
+        <div class="setting-text">
+            <h3>Dark Mode</h3>
+            <p>Toggle between Light and Dark themes</p>
+        </div>
+        <label class="switch">
+            <input type="checkbox" id="theme-toggle" checked>
+            <span class="slider round"></span>
+        </label>
+    </div>
+
+    <!-- More mock settings -->
+    <div class="setting-item">
+        <div class="setting-text">
+            <h3>Notifications</h3>
+            <p>Receive updates about new content</p>
+        </div>
+        <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider round"></span>
+        </label>
+    </div>
+
+    <div class="setting-item">
+        <div class="setting-text">
+            <h3>History</h3>
+            <p>Clear your watch history</p>
+        </div>
+        <button class="danger-btn">Clear History</button>
+    </div>
+</div>
+
+<style>
+    .settings-container {
+        padding: 40px;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .setting-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--bg-secondary);
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+    }
+
+    .setting-text h3 {
+        margin-bottom: 5px;
+    }
+
+    .setting-text p {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+    }
+
+    /* Switch CSS */
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: .4s;
+    }
+
+    input:checked+.slider {
+        background-color: var(--accent);
+    }
+
+    input:checked+.slider:before {
+        transform: translateX(26px);
+    }
+
+    .slider.round {
+        border-radius: 34px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+
+    .danger-btn {
+        background: #ff4545;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+{% endblock %}
